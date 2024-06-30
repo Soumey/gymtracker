@@ -8,8 +8,12 @@ import cors from 'cors';
 import { getDecksController } from './controllers/getDecksController';
 import { deleteDeckController } from './controllers/deleteDeckController';
 import { createDeckController } from './controllers/createDeckController';
+import { createCardForDeckController } from './controllers/createCardForDeckController';
+import { getDeckController } from './controllers/getDeckController';
+import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
+
 const app = express();
-const PORT = 5000;
+const PORT = 5002;
 
 app.use(cors({
     origin: '*',
@@ -22,6 +26,9 @@ app.get('/decks', getDecksController);
 app.post('/decks',createDeckController);
 app.delete('/decks/:deckId', deleteDeckController);
 
+app.get('/decks/:deckId', getDeckController);
+app.post('/decks/:deckId/cards',createCardForDeckController);
+app.delete('/decks/:deckId/cards/:index', deleteCardOnDeckController);
 
 
 const db = mongoose.connect(
