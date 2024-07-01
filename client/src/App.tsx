@@ -7,96 +7,26 @@ import { createDeck } from './api/createDeck';
 import { Link } from 'react-router-dom';
 
 function App() {
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [youtubeLink, setYoutubeLink] = useState("");
-  const [decks, setDecks] = useState<TDeck[]>([]);
 
-  async function handleCreateDeck(e: React.FormEvent) {
-    e.preventDefault();
-    const deck = await createDeck({ title, description, youtubeLink });
-    setDecks([...decks, deck]);
-    setTitle("");
-    setDescription("");
-    setYoutubeLink("");
-  }
 
-  useEffect(() => {
-    async function fetchDecks() {
-      const newDecks = await getDecks()
-      setDecks(newDecks)
-    }
-    fetchDecks();
-  }, []);
-
-  async function handleDeleteDeck(deckId: string) {
-    deleteDeck(deckId);
-    setDecks(decks.filter(deck => deck._id !== deckId));
-  }
 
   return (
-    <div className='App'>
-      <Container>
-        <Row>
-          {decks.map((deck) => (
-            <Col md={4} key={deck._id}>
-              <ListGroup.Item>
-                <Card style={{ width: '18rem',margin: '10px',backgroundColor: '#808080', color: 'white', padding: '10px'}}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
-                  <Card.Body>
-                     <Card.Title className='cardTitle'>
-                      <Link to={`decks/${deck._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
-                        {deck.title}
-                      </Link>
-                      </Card.Title>
-                    <Card.Text>
-                      Small description of exercise.
-                    </Card.Text>
-                    <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteDeck(deck._id)}>X</Button>
-                  </Card.Body>
-                </Card>
-              </ListGroup.Item>
-            </Col>
-          ))}
-        </Row>
-      </Container>
-
-      <Container>
-        <Form onSubmit={handleCreateDeck}>
-          <Form.Group className="mb-3" controlId="deckTitle">
-            <Form.Label className='text-white'>Deck Title</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter deck title"
-              value={title}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="deckDescription">
-            <Form.Label className='text-white'>Description</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter description"
-              value={description}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
-            />
-          </Form.Group>
-
-          <Form.Group className="mb-3" controlId="youtubeLink">
-            <Form.Label className='text-white'>YouTube Link</Form.Label>
-            <Form.Control
-              type="text"
-              placeholder="Enter YouTube link"
-              value={youtubeLink}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) => setYoutubeLink(e.target.value)}
-            />
-          </Form.Group>
-
-          <Button variant="primary" type="submit">Create</Button>
-        </Form>
-      </Container>
-    </div>
+    <div
+        className='p-5 text-center bg-dark '
+        style={{ height: "100vh",
+          backgroundSize: "cover",
+          backgroundPosition: "center",display: 'flex', justifyContent: 'center' }}
+      >
+        <div className='mt-5 mask w-75 p-3 h-75 mask-hover' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50 }}>
+          <div className='d-flex justify-content-center align-items-center h-100'>
+            <div className='text-white'>
+              <h1 className='mb-3'>Track Your Gym Progress with GymTracker</h1>
+              <h4 className='mb-3'>Stay on top of your fitness journey with our easy-to-use app.</h4>
+              <Button><Link to='Home' style={{ textDecoration: 'none', color: 'inherit' }}>Get Started</Link></Button>
+            </div>
+          </div>
+        </div>
+      </div>
   );
 }
 

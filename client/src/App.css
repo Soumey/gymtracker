@@ -1,6 +1,7 @@
 .App{
   background-color: rgb(43, 43, 44);
-  min-height: 100vh
+  min-height: 100vh;
+  min-width: 100vh;
 }
 .deleteBtn{
   position:absolute;
@@ -11,5 +12,14 @@
 
 .cardTitle:hover {
   background-color: #3d3d3d;
+  cursor: pointer;
+}
+.mask-hover {
+  transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.mask-hover:hover {
+  background-color: rgba(0, 0, 0, 0.7);
+  box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.5);
   cursor: pointer;
 }
