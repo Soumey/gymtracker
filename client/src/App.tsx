@@ -11,7 +11,7 @@ function App() {
     <div 
         className='p-5 text-center bg-dark container-fluid'
         style={{ height: "100vh",
-          backgroundSize: "cover",
+          backgroundSize: "auto",
           backgroundPosition: "center",
         backgroundImage:`url(${PeakMale})`,
         display: 'flex',
@@ -19,11 +19,12 @@ function App() {
         alignItems: 'center',
         textAlign: 'center'}}
       >
-        <Link to='/Home'><div className='mask w-75 p-3 h-75 mask-hover mx-auto' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50,marginTop:130 }}>
+        <Link to='/register'><div className='mask w-75 p-3 h-75 mask-hover mx-auto mb-1' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50,marginTop:130 }}>
           <div className='d-flex justify-content-center align-items-center h-100'>
             <div className='text-white'>
               <h1 className='mb-3'>Track Your Gym Progress with GymTracker</h1>
               <h4 className='mb-3'>Stay on top of your fitness journey with our easy-to-use app.</h4>
+              <h5 className='mb-3'>Try it now!</h5>
             </div>
           </div>
         </div>

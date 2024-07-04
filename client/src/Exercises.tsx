@@ -5,8 +5,9 @@ import { deleteDeck } from './api/deleteDeck';
 import { TDeck, getDecks } from './api/getDecks';
 import { createDeck } from './api/createDeck';
 import { Link } from 'react-router-dom';
+import PeakMale from './assets/PeakMale.png';
 
-function App() {
+export default function Exercises() {
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [youtubeLink, setYoutubeLink] = useState("");
@@ -42,7 +43,7 @@ function App() {
             <Col xs={12} sm={6} md={4} key={deck._id}>
               <ListGroup.Item>
                 <Card style={{ margin: '10px',backgroundColor: '#808080', color: 'white', padding: '10px'}}>
-                  <Card.Img variant="top" src="holder.js/100px180" />
+                  <Card.Img variant="top" src={PeakMale}/>
                   <Card.Body>
                      <Card.Title className='cardTitle'>
                       <Link to={`decks/${deck._id}`} style={{ textDecoration: 'none', color: 'inherit' }}>
@@ -50,7 +51,7 @@ function App() {
                       </Link>
                       </Card.Title>
                     <Card.Text>
-                      Small description of exercise.
+                      {deck.description}
                     </Card.Text>
                     <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteDeck(deck._id)}>X</Button>
                   </Card.Body>
@@ -60,7 +61,7 @@ function App() {
           ))}
         </Row>
       </Container>
-
+{/* //--------------------------- */}
       <Container>
         <Form onSubmit={handleCreateDeck}>
           <Form.Group className="mb-3" controlId="deckTitle">
@@ -93,11 +94,11 @@ function App() {
             />
           </Form.Group>
 
-          <Button variant="primary" type="submit">Create</Button>
+          <Button variant="primary" type="submit"  className='mb-5'>Create</Button>
         </Form>
       </Container>
     </div>
   );
 }
 
-export default App;
+

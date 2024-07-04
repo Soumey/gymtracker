@@ -9,7 +9,9 @@ import {createBrowserRouter,RouterProvider} from "react-router-dom";
 import Deck from './Deck.tsx';
 import TestSite from './TestSite.tsx';
 import Layout from './Layout.tsx';
-
+import Login  from './components/Login.tsx';
+import Register from './components/Register.tsx';
+import Exercises from './Exercises.tsx';
 
 const router = createBrowserRouter([
   {
@@ -21,12 +23,24 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: 'decks/:deckId',
+        path: '/exercises/decks/:deckId',
         element: <Deck />,
       },
       {
         path: 'Home',
         element: <TestSite />,
+      },
+      {
+        path: 'login',
+        element: <Login />,
+      },
+      {
+        path: 'register',
+        element: <Register />,
+      },
+      {
+        path: 'exercises',
+        element: <Exercises />,
       },
     ],
   },

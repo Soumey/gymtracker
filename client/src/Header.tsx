@@ -13,8 +13,8 @@ export function Header() {
                 <Navbar.Toggle aria-controls="basic-navbar-nav"><MDBIcon fas icon="bars" /> </Navbar.Toggle>
                 <Navbar.Collapse id="basic-navbar-nav">
                     <Nav className="ms-auto">
-                        <Nav.Link as={Link} to="/">Exercises</Nav.Link>
-                        <Nav.Link as={Link} to="/workout-tracker">Workout Tracker</Nav.Link>
+                        <Nav.Link as={Link} to="/exercises">Exercises</Nav.Link>
+                        <Nav.Link as={Link} to="/tracker">Tracker</Nav.Link>
                         <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                         <Nav.Link as={Link} to="/login">Login</Nav.Link>
                     </Nav>

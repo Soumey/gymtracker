@@ -4,6 +4,6 @@ import { TDeck } from "./getDecks";
 
 
 export async function getDeck(deckId:string):Promise<TDeck> {
-    const response = await fetch(`${API_URL}/decks/${deckId}`);
+    const response = await fetch(`${API_URL}/exercises/decks/${deckId}`);
     return response.json();
 }

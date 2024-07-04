@@ -1,0 +1,9 @@
+.loginDiv {
+    background-color: rgb(33, 37, 41);
+    min-height: 75vh;
+    min-width: 75vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}

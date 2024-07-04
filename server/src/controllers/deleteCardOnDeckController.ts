@@ -9,7 +9,7 @@ export async function deleteCardOnDeckController(req: Request, res: Response){
     const deck = await Deck.findById(deckId);
     // retrun the deleted deck to the user who made the request
     if (!deck) return res.status(400).send("no deck of this id exists");
-    deck.cards.splice(parseInt(index),1);
+    deck.exercise.splice(parseInt(index),1);
     await deck.save();
     res.json(deck);
 }

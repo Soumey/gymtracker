@@ -4,10 +4,11 @@ export type TDeck = {
     title: string;
     cards:string[];
     _id: string;
-    
+    description:string;
+    youtubeLink:string;
   }
 
 export async function getDecks():Promise<TDeck[]> {
-    const response = await fetch(`${API_URL}/decks`);
+    const response = await fetch(`${API_URL}/exercises`);
     return response.json();
 }
