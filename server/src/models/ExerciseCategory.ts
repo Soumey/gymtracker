@@ -21,7 +21,7 @@ const ExerciseSchema = new Schema({
 
 const ExerciseCategorySchema = new Schema({
     title: { type: String, required: true },
-    img: { type: String, required: true },
+    img: { type: String, required: false },
     exercises: [ExerciseSchema]
 });
 

@@ -25,7 +25,7 @@ const PORT = 5000;
 app.use(cors({
     origin: '*',
 }));
-app.use(express.json());// json post requests
+app.use(express.json({ limit: '50mb' }));// json post requests
 
 
 
