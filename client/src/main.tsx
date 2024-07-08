@@ -12,6 +12,7 @@ import Layout from './Layout.tsx';
 import Login  from './components/Login.tsx';
 import Register from './components/Register.tsx';
 import Exercises from './Exercises.tsx';
+import Categories from './components/Categories.tsx';
 
 const router = createBrowserRouter([
   {
@@ -40,6 +41,10 @@ const router = createBrowserRouter([
       },
       {
         path: 'exercises',
+        element: <Categories />,
+      },
+      {
+        path: 'uselesstesty',
         element: <Exercises />,
       },
     ],

@@ -20,7 +20,7 @@ import { getExercisesFromCategoryController } from './controllers/getExercisesFr
 import { getCategoriesController } from './controllers/getCategories';
 
 const app = express();
-const PORT = 5002;
+const PORT = 5000;
 
 app.use(cors({
     origin: '*',
@@ -39,12 +39,12 @@ app.use(express.json());// json post requests
 
 // Routes for exercise categories
 app.get('/exercises', getCategoriesController); //fetch all categories
-app.get('/exercises/:categoryId', getExerciseCategoryController); // fetch 1 category
+app.get('/exercises/:categoryId', getExerciseCategoryController); // fetch 1 category with exercises
 app.post('/exercises', createExerciseCategoryController);
 app.delete('/exercises/:categoryId', deleteExerciseCategoryController);
 
 // Routes for exercises within a category
-app.get('/exercises/:categoryId/exercises', getExercisesFromCategoryController); // New route
+app.get('/exercises/:categoryId/exercises', getExercisesFromCategoryController); //get exercises only from category
 app.post('/exercises/:categoryId/exercises', addExerciseToCategoryController);
 app.delete('/exercises/:categoryId/exercises/:exerciseId', deleteExerciseFromCategoryController);
 
