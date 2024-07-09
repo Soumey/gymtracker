@@ -14,6 +14,6 @@ export type TCategory = {
   }
 
 export async function getCategories():Promise<TCategory[]> {
-    const response = await fetch(`${API_URL}/exercises`);
+    const response = await fetch(`${API_URL}/categories`);
     return response.json();
 }

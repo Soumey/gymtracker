@@ -38,15 +38,15 @@ app.use(express.json({ limit: '50mb' }));// json post requests
 // app.delete('/exercises/decks/:deckId/cards/:index', deleteCardOnDeckController);
 
 // Routes for exercise categories
-app.get('/exercises', getCategoriesController); //fetch all categories
-app.get('/exercises/:categoryId', getExerciseCategoryController); // fetch 1 category with exercises
-app.post('/exercises', createExerciseCategoryController);
-app.delete('/exercises/:categoryId', deleteExerciseCategoryController);
+app.get('/categories', getCategoriesController); //fetch all categories
+app.get('/categories/:categoryId', getExerciseCategoryController); // fetch 1 category with exercises
+app.post('/categories', createExerciseCategoryController);
+app.delete('/categories/:categoryId', deleteExerciseCategoryController);
 
 // Routes for exercises within a category
-app.get('/exercises/:categoryId/exercises', getExercisesFromCategoryController); //get exercises only from category
-app.post('/exercises/:categoryId/exercises', addExerciseToCategoryController);
-app.delete('/exercises/:categoryId/exercises/:exerciseId', deleteExerciseFromCategoryController);
+app.get('/categories/:categoryId/exercises', getExercisesFromCategoryController); //get exercises only from category
+app.post('/categories/:categoryId/exercises', addExerciseToCategoryController);
+app.delete('/categories/:categoryId/exercises/:exerciseId', deleteExerciseFromCategoryController);
 
 
 

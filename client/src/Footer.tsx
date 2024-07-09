@@ -8,10 +8,10 @@ export function Footer() {
         <Container fluid className='text-secondary p-4 mx-auto' style={{ backgroundColor: '#343a40' }}>
             <Row className='justify-content-center mb-3'>
                 <Col xs="auto" className='text-center'>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Exercises</Link>
+                    <Link to="/categories" style={{ textDecoration: 'none', color: 'inherit' }}>Categories</Link>
                 </Col>
                 <Col xs="auto" className='text-center'>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Workout Tracker</Link>
+                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Tracker</Link>
                 </Col>
                 <Col xs="auto" className='text-center'>
                     <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Profile</Link>

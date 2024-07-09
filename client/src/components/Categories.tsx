@@ -4,6 +4,7 @@ import { Form, Button, Card, Col, Container, ListGroup, Row } from 'react-bootst
 import { createCategory } from '../api/createCategory';
 import { getCategories, TCategory } from '../api/getCategories';
 import { deleteCategory } from '../api/deleteCategory';
+import { Link } from 'react-router-dom';
 
 export default function Categories() {
     const [title, setTitle] = useState("");
@@ -52,7 +53,7 @@ export default function Categories() {
                     {categories.map((category) => (
                         <Col xs={12} sm={6} md={4} key={category._id}>
                             <ListGroup.Item>
-                                <Card style={{ margin: '10px', backgroundColor: '#808080', color: 'white', padding: '10px' }}>
+                                <Card style={{ margin: '10px', backgroundColor: '#808080', color: 'white', padding: '10px', textDecoration: 'none'}} as={Link} to={`/categories/${category._id}/exercises`}>
                                     <Card.Img variant="top" src={category.img} />
                                     <Card.Body>
                                         <Card.Title className='categoryTitle'>

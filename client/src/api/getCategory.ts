@@ -5,6 +5,6 @@ import { TCategory } from "./getCategories"
 
 
 export async function getCategory(categoryId:string):Promise<TCategory> {
-    const response = await fetch(`${API_URL}/${categoryId}/exercises`);
+    const response = await fetch(`${API_URL}/categories/${categoryId}/exercises`);
     return response.json();
 }

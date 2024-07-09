@@ -1,7 +1,7 @@
 import { API_URL } from "./config";
 
 export async function createCategory({ title, img }: { title: string; img: string; }) {
-    const response = await fetch(`${API_URL}/exercises`, {
+    const response = await fetch(`${API_URL}/categories`, {
         method: 'POST',
         body: JSON.stringify({
             title,

@@ -2,7 +2,7 @@ import { API_URL } from "./config";
 import { TCategory } from "./getCategories";
 
 export async function createExercise(categoryId:string,description:string,youtubeLink:string):Promise<TCategory>{
-    const response = await fetch(`${API_URL}/exercises/${categoryId}/exercises`, {
+    const response = await fetch(`${API_URL}/categories/${categoryId}/exercises`, {
         method: 'POST',
         body: JSON.stringify({
             name,

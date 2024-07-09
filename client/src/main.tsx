@@ -24,7 +24,7 @@ const router = createBrowserRouter([
         element: <App />,
       },
       {
-        path: '/exercises/decks/:deckId',
+        path: '/categories/:categoryId/exercises',
         element: <Deck />,
       },
       {
@@ -40,7 +40,7 @@ const router = createBrowserRouter([
         element: <Register />,
       },
       {
-        path: 'exercises',
+        path: 'categories',
         element: <Categories />,
       },
       {
