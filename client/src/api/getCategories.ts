@@ -2,8 +2,8 @@ import { API_URL } from "./config";
 export type TExercise={
     name:string;
     description:string;
-    youtubeLink:string;
-    __id:string;
+    link:string;
+    _id:string;
 
 }
 export type TCategory = {

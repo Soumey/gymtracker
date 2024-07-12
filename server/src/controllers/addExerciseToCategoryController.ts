@@ -5,7 +5,7 @@ import mongoose from 'mongoose';
 export const addExerciseToCategoryController = async (req: Request, res: Response) => {
     try {
         const { categoryId } = req.params;
-        const { name, description, youtubeLink } = req.body;
+        const { name, description, link } = req.body;
 
         if (!mongoose.Types.ObjectId.isValid(categoryId)) {
             return res.status(400).json({ message: 'Invalid category ID format' });
@@ -20,7 +20,7 @@ export const addExerciseToCategoryController = async (req: Request, res: Respons
             _id: new mongoose.Types.ObjectId(), // Generate a new ObjectId for the exercise
             name,
             description,
-            youtubeLink
+            link
         };
 
         category.exercises.push(newExercise);

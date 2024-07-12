@@ -4,7 +4,7 @@ interface Exercise {
     _id: Types.ObjectId;
     name: string;
     description: string;
-    youtubeLink: string;
+    link: string;
 }
 
 interface ExerciseCategory extends Document {
@@ -16,7 +16,7 @@ interface ExerciseCategory extends Document {
 const ExerciseSchema = new Schema({
     name: { type: String, required: true },
     description: { type: String, required: true },
-    youtubeLink: { type: String, required: true }
+    link: { type: String, required: true }
 });
 
 const ExerciseCategorySchema = new Schema({

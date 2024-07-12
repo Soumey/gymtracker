@@ -1,10 +1,10 @@
 // this one get ONLY exercises from specific category
 import { API_URL } from "./config";
-import { TCategory } from "./getCategories"
+import {  TExercise } from "./getCategories"
 
 
 
-export async function getCategory(categoryId:string):Promise<TCategory> {
+export async function getExercises(categoryId: string): Promise<TExercise[]> {
     const response = await fetch(`${API_URL}/categories/${categoryId}/exercises`);
-    return response.json();
+    return await response.json();
 }

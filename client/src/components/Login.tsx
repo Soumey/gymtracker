@@ -3,8 +3,14 @@ import { Button, Form } from 'react-bootstrap';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import PeakMale from '../assets/PeakMale.png'
+import { useState } from 'react';
 
 export default function Login() {
+
+    const [data,setData]=useState({
+        email:'',
+        password:'',
+    });
     return (
         <div className='loginDiv' style={{backgroundImage:`url(${PeakMale})`,backgroundSize: "auto",
         backgroundPosition: "center",}}>
@@ -21,8 +27,8 @@ export default function Login() {
                     <Form.Control
                         type="email"
                         placeholder="Enter email"
-                    //value={description}
-                    //onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
+                        value={data.email}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({...data,email:e.target.value})}
 
                     />
                 </Form.Group>
@@ -31,8 +37,8 @@ export default function Login() {
                     <Form.Control
                         type="password"
                         placeholder="Enter Password"
-                    //value={youtubeLink}
-                    //onChange={(e: React.ChangeEvent<HTMLInputElement>) => setYoutubeLink(e.target.value)}
+                        value={data.password}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({...data,password:e.target.value})}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3 text-secondary">

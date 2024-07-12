@@ -20,10 +20,10 @@ import { getExercisesFromCategoryController } from './controllers/getExercisesFr
 import { getCategoriesController } from './controllers/getCategories';
 
 const app = express();
-const PORT = 5000;
+const PORT = 5001;
 
 app.use(cors({
-    origin: '*',
+    origin: `http://localhost:${PORT}`,
 }));
 app.use(express.json({ limit: '50mb' }));// json post requests
 
@@ -47,6 +47,8 @@ app.delete('/categories/:categoryId', deleteExerciseCategoryController);
 app.get('/categories/:categoryId/exercises', getExercisesFromCategoryController); //get exercises only from category
 app.post('/categories/:categoryId/exercises', addExerciseToCategoryController);
 app.delete('/categories/:categoryId/exercises/:exerciseId', deleteExerciseFromCategoryController);
+
+//Auth routes
 
 
 
