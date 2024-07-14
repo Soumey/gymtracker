@@ -20,7 +20,7 @@
   
   .cards {
     display: grid;
-    width: 100vh;
+    width: 100dvh;
     margin: 0 auto;
     grid-gap: 10px;
     grid-template-columns: repeat(3, 2fr);

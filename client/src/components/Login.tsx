@@ -4,20 +4,56 @@ import './Login.css'
 import { Link } from 'react-router-dom';
 import PeakMale from '../assets/PeakMale.png'
 import { useState } from 'react';
+import { loginUser } from '../api/loginUser';
+import toast from 'react-hot-toast';
+import { useNavigate } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../api/getUserProfile';
 
 export default function Login() {
-
-    const [data,setData]=useState({
-        email:'',
-        password:'',
+    const userContext = useContext(UserContext);
+    const navigate=useNavigate();
+    const [data, setData] = useState({
+        email: '',
+        password: '',
     });
+
+    async function handleLoginUser(e: React.FormEvent) {
+        e.preventDefault();
+        const { email, password } = data;
+        try {
+            userContext?.setUser(null);  // Clear the previous user state
+            const user = await loginUser({ email, password });
+            userContext?.setUser(user);
+            
+            const responseData = await loginUser({  email, password });
+
+            if (responseData.error) {
+                toast.error(responseData.error);
+            } else {
+                setData({
+                    email: '',
+                    password: '',
+                });
+                toast.success('Login Successful. Welcome!');
+                navigate('/profile');
+            }
+        } catch (error) {
+            console.log(error);
+            toast.error('An error occurred. Please try again.');
+        }
+    }
+
+
     return (
-        <div className='loginDiv' style={{backgroundImage:`url(${PeakMale})`,backgroundSize: "auto",
-        backgroundPosition: "center",}}>
+        <div className='loginDiv' style={{
+            backgroundImage: `url(${PeakMale})`, backgroundSize: "auto",
+            backgroundPosition: "center",
+        }}>
 
 
-            <Form style={{ minWidth: 500 }}>
-                <Form.Group className="mb-5" style={{minHeight:200,minWidth:200}}>
+            <Form style={{ minWidth: 500 }} onSubmit={handleLoginUser}>
+                <Form.Group className="mb-5" style={{ minHeight: 200, minWidth: 200 }}>
                     <div className="d-flex justify-content-center text-secondary">
                         <h1>Gym Tracker logo bratku</h1>
                     </div>
@@ -28,7 +64,7 @@ export default function Login() {
                         type="email"
                         placeholder="Enter email"
                         value={data.email}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({...data,email:e.target.value})}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, email: e.target.value })}
 
                     />
                 </Form.Group>
@@ -38,7 +74,7 @@ export default function Login() {
                         type="password"
                         placeholder="Enter Password"
                         value={data.password}
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({...data,password:e.target.value})}
+                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, password: e.target.value })}
                     />
                 </Form.Group>
                 <Form.Group className="mb-3 text-secondary">

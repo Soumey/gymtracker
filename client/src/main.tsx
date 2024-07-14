@@ -14,6 +14,7 @@ import Register from './components/Register.tsx';
 import Exercises from './Exercises.tsx';
 import Categories from './components/Categories.tsx';
 import Exercise from './components/Exercise.tsx';
+import Profile from './components/Profile.tsx';
 
 const router = createBrowserRouter([
   {
@@ -48,6 +49,10 @@ const router = createBrowserRouter([
         path: 'uselesstesty',
         element: <Exercises />,
       },
+      {
+        path:'profile',
+        element:<Profile/>,
+      }
     ],
   },
 ]);

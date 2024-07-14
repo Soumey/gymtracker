@@ -1,10 +1,10 @@
 import dotenv from 'dotenv';
 require('dotenv').config();
-
 import express, { Request, Response } from 'express';
 import mongoose from 'mongoose';
 import Deck from './models/Deck';
 import cors from 'cors';
+import cookieParser from 'cookie-parser'
 import { getDecksController } from './controllers/getDecksController';
 import { deleteDeckController } from './controllers/deleteDeckController';
 import { createDeckController } from './controllers/createDeckController';
@@ -18,14 +18,21 @@ import { deleteExerciseCategoryController } from './controllers/deleteExerciseCa
 import { deleteExerciseFromCategoryController } from './controllers/deleteExerciseFromCategoryController';
 import { getExercisesFromCategoryController } from './controllers/getExercisesFromCategoryController';
 import { getCategoriesController } from './controllers/getCategories';
+import { createAccountController } from './controllers/createAccountController';
+import { loginUserController } from './controllers/loginUserController';
+import { getProfileController } from './controllers/getProfileController';
+
 
 const app = express();
 const PORT = 5001;
 
 app.use(cors({
-    origin: `http://localhost:${PORT}`,
+    origin: 'http://localhost:5173',
+    credentials:true
 }));
 app.use(express.json({ limit: '50mb' }));// json post requests
+app.use(cookieParser())
+app.use(express.urlencoded({extended:false}))
 
 
 
@@ -49,8 +56,9 @@ app.post('/categories/:categoryId/exercises', addExerciseToCategoryController);
 app.delete('/categories/:categoryId/exercises/:exerciseId', deleteExerciseFromCategoryController);
 
 //Auth routes
-
-
+app.post('/register/',createAccountController)
+app.post('/login',loginUserController)
+app.get('/profile',getProfileController)
 
 
 const db = mongoose.connect(
