@@ -1,16 +1,8 @@
-import dotenv from 'dotenv';
 require('dotenv').config();
-import express, { Request, Response } from 'express';
+import express, {  } from 'express';
 import mongoose from 'mongoose';
-import Deck from './models/Deck';
 import cors from 'cors';
 import cookieParser from 'cookie-parser'
-import { getDecksController } from './controllers/getDecksController';
-import { deleteDeckController } from './controllers/deleteDeckController';
-import { createDeckController } from './controllers/createDeckController';
-import { createCardForDeckController } from './controllers/createCardForDeckController';
-import { getDeckController } from './controllers/getDeckController';
-import { deleteCardOnDeckController } from './controllers/deleteCardOnDeckController';
 import { getExerciseCategoryController } from './controllers/getExerciseCategoryController';
 import { addExerciseToCategoryController } from './controllers/addExerciseToCategoryController';
 import { createExerciseCategoryController } from './controllers/createExerciseCategoryController';
@@ -33,16 +25,6 @@ app.use(cors({
 app.use(express.json({ limit: '50mb' }));// json post requests
 app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
-
-
-
-// app.get('/exercises', getDecksController);
-// app.post('/exercises',createDeckController);
-// app.delete('/exercises/:deckId', deleteDeckController);
-
-// app.get('/exercises/decks/:deckId', getDeckController);
-// app.post('/exercises/decks/:deckId/cards',createCardForDeckController);
-// app.delete('/exercises/decks/:deckId/cards/:index', deleteCardOnDeckController);
 
 // Routes for exercise categories
 app.get('/categories', getCategoriesController); //fetch all categories

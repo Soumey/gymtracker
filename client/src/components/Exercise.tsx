@@ -67,7 +67,7 @@ export default function Exercise() {
                     <Card.Title className='categoryTitle'>{exercise.name}</Card.Title>
                     <Card.Text>{exercise.description}</Card.Text>
                     <Card.Link href={exercise.link.startsWith('http') ? exercise.link : `http://${exercise.link}`}>Video Example</Card.Link>
-                    <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteExercise(categoryId,exercise._id)}>X</Button>
+                    <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteExercise(categoryId!,exercise._id)}>X</Button>
                   </Card.Body>
                 </Card>
               </ListGroup.Item>
