@@ -1,6 +1,6 @@
 
-import  { getUserProfile, User, UserContext, UserContextProviderProps } from '../src/api/getUserProfile'
-import React, {  useState, useEffect } from "react";
+import { getUserProfile, User, UserContext, UserContextProviderProps } from '../src/api/getUserProfile'
+import React, { useState, useEffect } from "react";
 
 
 
@@ -18,11 +18,12 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
             }
         }
 
-        if (!user) {
+        if (user !== null) {
             loadUser();
         }
-    }, [user]);
+    }, []);
 
+     
     return (
         <UserContext.Provider value={{ user, setUser }}>
             {children}

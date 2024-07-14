@@ -1,11 +1,11 @@
+
 import './App.css';
 import PeakMale from './assets/PeakMale.png';
 import { Link } from 'react-router-dom';
 
 function App() {
 
-
-
+  
   return (
 
     <div 
@@ -24,7 +24,7 @@ function App() {
             <div className='text-white'>
               <h1 className='mb-3'>Track Your Gym Progress with GymTracker</h1>
               <h4 className='mb-3'>Stay on top of your fitness journey with our easy-to-use app.</h4>
-              <h5 className='mb-3'>Try it now!</h5>
+              <h4 className='mb-3'>Join us now!</h4>
             </div>
           </div>
         </div>

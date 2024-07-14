@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useContext } from 'react'
 import { Button, Card, Col, Container, Form, ListGroup, Row } from 'react-bootstrap';
 import { useParams } from 'react-router-dom';
 import { TExercise } from '../api/getCategories';
@@ -6,11 +6,13 @@ import { getExercises } from '../api/getExercises';
 import '../App.css'
 import { createExercise } from '../api/createExercise';
 import { deleteExercise } from '../api/deleteExercise';
+import { UserContext } from '../api/getUserProfile';
 
 
 
 
 export default function Exercise() {
+  const userContext = useContext(UserContext);
   const { categoryId } = useParams<{ categoryId: string }>();
   const [name, setName] = useState("");
   const [description, setDescription] = useState("");
@@ -77,7 +79,8 @@ export default function Exercise() {
       </Container>
 
 
-
+      {userContext?.user && (
+                            <>
       <Container>
         <Form onSubmit={handleCreateExercise} >
           <Form.Group className="mb-3" controlId="exerciseName">
@@ -108,6 +111,8 @@ export default function Exercise() {
           <Button variant="primary" type="submit" className='mb-5'>Create</Button>
         </Form>
       </Container>
+      </>
+      )}
     </div>
   )
 

@@ -5,8 +5,11 @@ import { createCategory } from '../api/createCategory';
 import { getCategories, TCategory } from '../api/getCategories';
 import { deleteCategory } from '../api/deleteCategory';
 import { Link } from 'react-router-dom';
+import { useContext } from 'react';
+import { UserContext } from '../api/getUserProfile';
 
 export default function Categories() {
+    const userContext = useContext(UserContext);
     const [title, setTitle] = useState("");
     const [img, setImg] = useState<string>("");
     const [categories, setCategories] = useState<TCategory[]>([]);
@@ -67,6 +70,8 @@ export default function Categories() {
                     ))}
                 </Row>
             </Container>
+            {userContext?.user && (
+                            <>
             <Container>
                 <Form onSubmit={handleCreateCategory}>
                     <Form.Group className="mb-3" controlId="categoryTitle">
@@ -88,6 +93,8 @@ export default function Categories() {
                     <Button variant="primary" type="submit" className='mb-5'>Create</Button>
                 </Form>
             </Container>
+            </>
+            )}
         </div>
     );
 }
