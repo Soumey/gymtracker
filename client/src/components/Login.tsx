@@ -1,5 +1,5 @@
 
-import { Button, Form } from 'react-bootstrap';
+import { Button, Container, Form } from 'react-bootstrap';
 import './Login.css'
 import { Link } from 'react-router-dom';
 import PeakMale from '../assets/PeakMale.png'
@@ -8,7 +8,7 @@ import { loginUser } from '../api/loginUser';
 import toast from 'react-hot-toast';
 import { useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
-import { UserContext } from '../api/getUserProfile';
+import { getUserProfile, UserContext } from '../api/getUserProfile';
 
 export default function Login() {
     const userContext = useContext(UserContext);
@@ -22,19 +22,16 @@ export default function Login() {
         e.preventDefault();
         const { email, password } = data;
         try {
-            userContext?.setUser(null);  // Clear the previous user state
-            const user = await loginUser({ email, password });
-            userContext?.setUser(user);
-            
-            const responseData = await loginUser({  email, password });
-
+            userContext?.setUser(null); // Clear the previous user state
+            const responseData = await loginUser({ email, password });
+            const { token } = responseData;
             if (responseData.error) {
                 toast.error(responseData.error);
             } else {
-                setData({
-                    email: '',
-                    password: '',
-                });
+                localStorage.setItem('token', token); // Store token in localStorage
+                const userProfile = await getUserProfile(token);
+                userContext!.setUser(userProfile);
+                setData({ email: '', password: '' });
                 toast.success('Login Successful. Welcome!');
                 navigate('/profile');
             }
@@ -50,7 +47,6 @@ export default function Login() {
             backgroundImage: `url(${PeakMale})`, backgroundSize: "auto",
             backgroundPosition: "center",
         }}>
-
 
             <Form style={{ minWidth: 500 }} onSubmit={handleLoginUser}>
                 <Form.Group className="mb-5" style={{ minHeight: 200, minWidth: 200 }}>

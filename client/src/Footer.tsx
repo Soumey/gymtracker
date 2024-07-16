@@ -2,24 +2,37 @@ import { Col, Row } from 'react-bootstrap';
 import Container from 'react-bootstrap/Container';
 import { Link } from 'react-router-dom';
 import { MDBBtn, MDBIcon } from 'mdb-react-ui-kit';
+import { useContext } from 'react';
+import { UserContext } from './api/getUserProfile';
 
 export function Footer() {
+    const userContext = useContext(UserContext);
     return (
-        <Container fluid className='text-secondary p-4 mx-auto' style={{ backgroundColor: '#343a40' }}>
-            <Row className='justify-content-center mb-3'>
-                <Col xs="auto" className='text-center'>
-                    <Link to="/categories" style={{ textDecoration: 'none', color: 'inherit' }}>Categories</Link>
-                </Col>
-                <Col xs="auto" className='text-center'>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Tracker</Link>
-                </Col>
-                <Col xs="auto" className='text-center'>
-                    <Link to="/" style={{ textDecoration: 'none', color: 'inherit' }}>Profile</Link>
-                </Col>
-                <Col xs="auto" className='text-center'>
-                    <Link to="login" style={{ textDecoration: 'none', color: 'inherit' }}>Login</Link>
-                </Col>
-            </Row>
+        <Container fluid className='text-secondary p-4 mx-auto fixed-bottom' style={{ backgroundColor: '#343a40' }}>
+
+            {!userContext?.user && (
+                 <Row className='justify-content-center mb-3'>
+                    <Col xs="auto" className='text-center'>
+                        <Link to="/categories" style={{ textDecoration: 'none', color: 'inherit' }}>Categories</Link>
+                    </Col>
+                    <Col xs="auto" className='text-center'>
+                        <Link to="/login"  style={{ textDecoration: 'none', color: 'inherit' }}>Login</Link>
+                    </Col>
+                </Row>
+            )}
+            {userContext?.user && (
+                <Row className='justify-content-center mb-3'>
+                    <Col xs="auto" className='text-center'>
+                        <Link to="/categories" style={{ textDecoration: 'none', color: 'inherit' }}>Categories</Link>
+                    </Col>
+                    <Col xs="auto" className='text-center'>
+                        <Link to="/tracker" style={{ textDecoration: 'none', color: 'inherit' }}>Tracker</Link>
+                    </Col>
+                    <Col xs="auto" className='text-center'>
+                        <Link to="/profile" style={{ textDecoration: 'none', color: 'inherit' }}>Profile</Link>
+                    </Col>
+                </Row>
+            )}
             <Row className='justify-content-center mb-3'>
                 <Col xs="auto" className='text-center'>
                     <MDBBtn className='m-1' style={{ backgroundColor: '#0082ca' }} href='https://www.linkedin.com/in/arkadiusz-cieslak'>

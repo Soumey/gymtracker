@@ -17,9 +17,10 @@ function App() {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        textAlign: 'center'}}
+        textAlign: 'center',
+      marginBottom:'100px'}}
       >
-        <Link to='/register'><div className='mask w-75 p-3 h-75 mask-hover mx-auto mb-1' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50,marginTop:130 }}>
+        <Link to='/register'><div className='mask w-75 p-3 h-75 mask-hover mx-auto mb-1' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50,marginTop:80 }}>
           <div className='d-flex justify-content-center align-items-center h-100'>
             <div className='text-white'>
               <h1 className='mb-3'>Track Your Gym Progress with GymTracker</h1>

@@ -3,7 +3,7 @@ import { Button, Card, Col, Container, Form, ListGroup, Row } from 'react-bootst
 import { useParams } from 'react-router-dom';
 import { TExercise } from '../api/getCategories';
 import { getExercises } from '../api/getExercises';
-import '../App.css'
+import './card.css'
 import { createExercise } from '../api/createExercise';
 import { deleteExercise } from '../api/deleteExercise';
 import { UserContext } from '../api/getUserProfile';
@@ -58,13 +58,13 @@ export default function Exercise() {
   }
 
   return (
-    <div className='App'>
-      <Container>
+    <Container fluid style={{ backgroundColor: 'rgb(43, 43, 44)', padding: '20px' }}>
+      
         <Row>
           {exercises.map((exercise) => (
-            <Col xs={12} sm={6} md={4} key={exercise._id}>
-              <ListGroup.Item>
-                <Card style={{ margin: '10px', backgroundColor: '#808080', color: 'white', padding: '10px' }}>
+            <Col xs={12} sm={6} md={4} key={exercise._id} className="d-flex">
+              <ListGroup.Item className="w-100">
+                <Card className="category-card">
                   <Card.Body>
                     <Card.Title className='categoryTitle'>{exercise.name}</Card.Title>
                     <Card.Text>{exercise.description}</Card.Text>
@@ -76,13 +76,13 @@ export default function Exercise() {
             </Col>
           ))}
         </Row>
-      </Container>
+      
 
 
       {userContext?.user && (
                             <>
-      <Container>
-        <Form onSubmit={handleCreateExercise} >
+      
+        <Form className='mt-5' onSubmit={handleCreateExercise} >
           <Form.Group className="mb-3" controlId="exerciseName">
             <Form.Label className='text-white'>Exercise name</Form.Label>
             <Form.Control
@@ -110,10 +110,10 @@ export default function Exercise() {
           </Form.Group>
           <Button variant="primary" type="submit" className='mb-5'>Create</Button>
         </Form>
-      </Container>
+      
       </>
       )}
-    </div>
+      </Container>
   )
 
 }

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import '../App.css';
+import './card.css';
 import { Form, Button, Card, Col, Container, ListGroup, Row } from 'react-bootstrap';
 import { createCategory } from '../api/createCategory';
 import { getCategories, TCategory } from '../api/getCategories';
@@ -50,30 +50,28 @@ export default function Categories() {
     }
 
     return (
-        <div className='App'>
-            <Container>
-                <Row>
-                    {categories.map((category) => (
-                        <Col xs={12} sm={6} md={4} key={category._id}>
-                            <ListGroup.Item>
-                                <Card style={{ margin: '10px', backgroundColor: '#808080', color: 'white', padding: '10px', textDecoration: 'none'}} as={Link} to={`/categories/${category._id}/exercises`}>
-                                    <Card.Img variant="top" src={category.img} />
-                                    <Card.Body>
-                                        <Card.Title className='categoryTitle'>
-                                            {category.title}
-                                        </Card.Title>
-                                        <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteCategory(category._id)}>X</Button>
-                                    </Card.Body>
-                                </Card>
-                            </ListGroup.Item>
-                        </Col>
-                    ))}
-                </Row>
-            </Container>
+        <Container fluid style={{ backgroundColor: 'rgb(43, 43, 44)', padding: '20px' }}>
+            <Row>
+                {categories.map((category) => (
+                    <Col xs={12} sm={6} md={4} key={category._id} className="d-flex">
+                        <ListGroup.Item className="w-100">
+                            <Card className="category-card" as={Link} to={`/categories/${category._id}/exercises`}>
+                                <Card.Img variant="top" src={category.img} className="category-card-img" />
+                                <Card.Body className="category-card-body">
+                                    <Card.Title className='categoryTitle'>
+                                        {category.title}
+                                    </Card.Title>
+                                    <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteCategory(category._id)}>X</Button>
+                                </Card.Body>
+                            </Card>
+                        </ListGroup.Item>
+                    </Col>
+                ))}
+            </Row>
+            
             {userContext?.user && (
-                            <>
-            <Container>
-                <Form onSubmit={handleCreateCategory}>
+                
+                <Form  className='mt-5'onSubmit={handleCreateCategory}>
                     <Form.Group className="mb-3" controlId="categoryTitle">
                         <Form.Label className='text-white'>Category Title</Form.Label>
                         <Form.Control
@@ -92,9 +90,8 @@ export default function Categories() {
                     </Form.Group>
                     <Button variant="primary" type="submit" className='mb-5'>Create</Button>
                 </Form>
-            </Container>
-            </>
+                
             )}
-        </div>
+        </Container>
     );
 }

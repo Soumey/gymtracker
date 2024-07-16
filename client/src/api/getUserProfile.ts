@@ -14,13 +14,13 @@ export interface UserContextProviderProps {
 }
 export const UserContext = createContext<UserContextProps | undefined>(undefined);
 
-export async function getUserProfile(): Promise<User> {
+export async function getUserProfile(token: string): Promise<User> {
     const response = await fetch(`${API_URL}/profile`, {
         method: 'GET',
         headers: {
             'Content-Type': 'application/json',
-        },
-        credentials: 'include'
+            'Authorization': `Bearer ${token}`
+        }
     });
     if (!response.ok) {
         throw new Error('Failed to fetch user profile');

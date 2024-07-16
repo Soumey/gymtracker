@@ -1,0 +1,20 @@
+.category-card {
+    margin: 10px;
+    background-color: #808080;
+    color: white;
+    padding: 10px;
+    text-decoration: none;
+    height: 100%;
+}
+
+.category-card-body {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    height: 100%;
+}
+
+.category-card-img {
+    height: 200px;
+    object-fit: cover;
+}

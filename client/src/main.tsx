@@ -6,14 +6,13 @@ import '@fortawesome/fontawesome-free/css/all.min.css';
 import 'mdb-react-ui-kit/dist/css/mdb.min.css';
 import 'bootstrap/dist/css/bootstrap.min.css';
 import {createBrowserRouter,RouterProvider} from "react-router-dom";
-
-import TestSite from './TestSite.tsx';
 import Layout from './Layout.tsx';
 import Login  from './components/Login.tsx';
 import Register from './components/Register.tsx';
 import Categories from './components/Categories.tsx';
 import Exercise from './components/Exercise.tsx';
 import Profile from './components/Profile.tsx';
+import Tracker from './components/Tracker.tsx'
 
 const router = createBrowserRouter([
   {
@@ -27,10 +26,6 @@ const router = createBrowserRouter([
       {
         path: '/categories/:categoryId/exercises',
         element: <Exercise />,
-      },
-      {
-        path: 'Home',
-        element: <TestSite />,
       },
       {
         path: 'login',
@@ -47,7 +42,12 @@ const router = createBrowserRouter([
       {
         path:'profile',
         element:<Profile/>,
+      },
+      {
+        path:'tracker',
+        element:<Tracker />
       }
+
     ],
   },
 ]);

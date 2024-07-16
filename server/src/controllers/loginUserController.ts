@@ -19,15 +19,11 @@ export async function loginUserController(req: Request, res: Response) {
             const token = jwt.sign(
                 { email: user.email, id: user._id, username: user.username },
                 process.env.JWT_SECRET!,
-                { expiresIn: '1h' } // Token expiration time
+                { expiresIn: '1h' } 
             );
 
-            res.cookie('token', token, {
-                httpOnly: true,
-                secure: process.env.NODE_ENV === 'production', // Use secure cookies in production only
-                sameSite: 'lax'
-            });
-            return res.status(200).json(user);
+            return res.status(200).json({ user: { email: user.email, username: user.username }, token });
+            
         } else {
             return res.status(401).json({ error: "Password does not match" });
         }

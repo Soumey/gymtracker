@@ -8,20 +8,21 @@ export const UserContextProvider: React.FC<UserContextProviderProps> = ({ childr
     const [user, setUser] = useState<User | null>(null);
 
     useEffect(() => {
-        async function loadUser() {
-            try {
-                const userProfile = await getUserProfile();
-                setUser(userProfile);
-            } catch (error) {
-                console.error('Failed to load user profile:', error);
-                setUser(null);
+        const token = localStorage.getItem('token');
+        if (token) {
+            async function loadUser() {
+                try {
+                    const userProfile = await getUserProfile(token!);
+                    setUser(userProfile);
+                } catch (error) {
+                    console.error('Failed to load user profile:', error);
+                    setUser(null);
+                }
             }
-        }
-
-        if (user !== null) {
             loadUser();
         }
     }, []);
+
 
      
     return (
