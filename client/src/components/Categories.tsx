@@ -4,7 +4,7 @@ import { Form, Button, Card, Col, Container, ListGroup, Row } from 'react-bootst
 import { createCategory } from '../api/createCategory';
 import { getCategories, TCategory } from '../api/getCategories';
 import { deleteCategory } from '../api/deleteCategory';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useContext } from 'react';
 import { UserContext } from '../api/getUserProfile';
 
@@ -13,7 +13,7 @@ export default function Categories() {
     const [title, setTitle] = useState("");
     const [img, setImg] = useState<string>("");
     const [categories, setCategories] = useState<TCategory[]>([]);
-
+    const navigate=useNavigate();
     async function handleCreateCategory(e: React.FormEvent) {
         e.preventDefault();
         const category = await createCategory({ title, img });
@@ -53,12 +53,12 @@ export default function Categories() {
         <Container fluid style={{ backgroundColor: 'rgb(43, 43, 44)', padding: '20px' }}>
             <Row>
                 {categories.map((category) => (
-                    <Col xs={12} sm={6} md={4} key={category._id} className="d-flex">
+                    <Col xs={12} sm={6} md={4} key={category._id} className="d-flex mt-3">
                         <ListGroup.Item className="w-100">
-                            <Card className="category-card" as={Link} to={`/categories/${category._id}/exercises`}>
+                            <Card className="category-card" >
                                 <Card.Img variant="top" src={category.img} className="category-card-img" />
                                 <Card.Body className="category-card-body">
-                                    <Card.Title className='categoryTitle'>
+                                    <Card.Title className='categoryTitle' as={Link} to={`/categories/${category._id}/exercises`} style={{ textDecoration: 'none', color: 'inherit' }}>
                                         {category.title}
                                     </Card.Title>
                                     <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteCategory(category._id)}>X</Button>
@@ -69,7 +69,7 @@ export default function Categories() {
                 ))}
             </Row>
             
-            {userContext?.user && (
+            {/* {userContext?.user && (
                 
                 <Form  className='mt-5'onSubmit={handleCreateCategory}>
                     <Form.Group className="mb-3" controlId="categoryTitle">
@@ -91,7 +91,7 @@ export default function Categories() {
                     <Button variant="primary" type="submit" className='mb-5'>Create</Button>
                 </Form>
                 
-            )}
+            )} */}
         </Container>
     );
 }

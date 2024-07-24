@@ -35,7 +35,7 @@ export function Header() {
                     {userContext?.user && (
                         <>
                             <Nav.Link as={Link} to="/categories">Categories</Nav.Link>
-                            <Nav.Link as={Link} to="/tracker">Tracker</Nav.Link>
+                            <Nav.Link as={Link} to='/tracker/'>Tracker</Nav.Link>
                             <Nav.Link as={Link} to="/profile">Profile</Nav.Link>
                             <Nav.Link onClick={handleLogout}>Logout</Nav.Link>
                         </>

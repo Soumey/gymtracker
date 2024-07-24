@@ -9,16 +9,17 @@ function App() {
   return (
 
     <div 
-        className='p-5 text-center bg-dark container-fluid'
-        style={{ height: "100vh",
-          backgroundSize: "auto",
+        className=' text-center bg-dark container-fluid'
+        style={{
+          height: "100dvh",
+          backgroundSize: "100% 100%",
           backgroundPosition: "center",
-        backgroundImage:`url(${PeakMale})`,
-        display: 'flex',
-        justifyContent: 'center',
-        alignItems: 'center',
-        textAlign: 'center',
-      marginBottom:'100px'}}
+          backgroundImage: `url(${PeakMale})`,
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          textAlign: 'center',
+        }}
       >
         <Link to='/register'><div className='mask w-75 p-3 h-75 mask-hover mx-auto mb-1' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50,marginTop:80 }}>
           <div className='d-flex justify-content-center align-items-center h-100'>

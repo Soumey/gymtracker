@@ -8,7 +8,7 @@ import { UserContext } from './api/getUserProfile';
 export function Footer() {
     const userContext = useContext(UserContext);
     return (
-        <Container fluid className='text-secondary p-4 mx-auto fixed-bottom' style={{ backgroundColor: '#343a40' }}>
+        <Container fluid className='text-secondary p-4 mx-auto mt-0' style={{ backgroundColor: '#343a40' }}>
 
             {!userContext?.user && (
                  <Row className='justify-content-center mb-3'>

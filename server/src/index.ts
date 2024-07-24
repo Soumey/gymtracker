@@ -13,6 +13,7 @@ import { getCategoriesController } from './controllers/getCategories';
 import { createAccountController } from './controllers/createAccountController';
 import { loginUserController } from './controllers/loginUserController';
 import { getProfileController } from './controllers/getProfileController';
+import { updateProfileController } from './controllers/updateProfileController';
 
 
 const app = express();
@@ -22,7 +23,7 @@ app.use(cors({
     origin: 'http://localhost:5173',
     credentials:true
 }));
-app.use(express.json({ limit: '50mb' }));// json post requests
+app.use(express.json({ limit: '5mb' }));// json post requests
 app.use(cookieParser())
 app.use(express.urlencoded({extended:false}))
 
@@ -42,6 +43,10 @@ app.post('/register/',createAccountController)
 app.post('/login',loginUserController)
 app.get('/profile',getProfileController)
 
+//Personal Records Routes
+//app.post('/')
+//app.get('/profile')
+app.post('/profile/', updateProfileController)
 
 const db = mongoose.connect(
     process.env.MONGO_URL!)
