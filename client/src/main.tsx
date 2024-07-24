@@ -13,6 +13,7 @@ import Categories from './components/Categories.tsx';
 import Exercise from './components/Exercise.tsx';
 import Profile from './components/Profile.tsx';
 import Tracker from './components/Tracker.tsx'
+import ControlPanel from './components/ControlPanel.tsx';
 
 const router = createBrowserRouter([
   {
@@ -44,9 +45,13 @@ const router = createBrowserRouter([
         element:<Profile/>,
       },
       {
-        path:'tracker/',
+        path:'tracker',
         element:<Tracker />
-      }
+      },
+      {
+        path:'controlpanel',
+        element:<ControlPanel />
+      },
 
     ],
   },
