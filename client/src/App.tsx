@@ -1,6 +1,5 @@
 
 import './App.css';
-import PeakMale from './assets/PeakMale.png';
 import { Link } from 'react-router-dom';
 
 function App() {
@@ -12,9 +11,7 @@ function App() {
         className=' text-center bg-dark container-fluid'
         style={{
           height: "100dvh",
-          backgroundSize: "100% 100%",
-          backgroundPosition: "center",
-          backgroundImage: `url(${PeakMale})`,
+         
           display: 'flex',
           justifyContent: 'center',
           alignItems: 'center',

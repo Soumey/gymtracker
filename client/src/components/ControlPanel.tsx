@@ -1,10 +1,10 @@
 import React, { useEffect, useState } from "react"
-import { Button, Col, Container, Form, Row } from "react-bootstrap"
+import { Button, Card, Col, Container, Form, Row } from "react-bootstrap"
 import { TCategory, getCategories } from "../api/getCategories";
 import { deleteExercise } from "../api/deleteExercise";
 import EditPopup from "./EditPopup";
 import { createExercise } from "../api/createExercise";
-
+import './ControlPanel.css'
 
 export default function ControlPanel() {
 
@@ -38,90 +38,90 @@ export default function ControlPanel() {
 
 
     return (
-        <Container className="mt-4 d-flex justify-content-around text-white flex-column">
+        <Container className="mt-4 d-flex justify-content-center text-white flex-column">
             {/*map on categories to show them */}
+            {/*
+<Card>
+    <Card.Body>
+    <Card.Title className='categoryTitle'>{category.name}</Card.Title>
+    <Card.Text>{exercise.description}</Card.Text>
+     <Card.Link href={exercise.link.startsWith('http') ? exercise.link : `http://${exercise.link}`}>Video Example</Card.Link>
+     <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteExercise(categoryId!,exercise._id)}>X</Button>
+    </Card.Body>
+</Card>*/}
             {categories.map((category) => (
-                <Row className="m-5">
-                    <Row>
+                <Card className="m-5 category-card" key={category._id}>
+                    <Card.Title>
                         {category.title}
-                    </Row>
+                    </Card.Title>
                     {/*map inside of map for exercises inside of category */}
                     {category.exercises.map((exercise) => (
-                        <Container className="pl-2">
+                        <Card.Body className="border border-3 rounded mb-3 border-secondary  mask-hover mb-1 bg-secondary" style={{backgroundColor:" #808080"}}>
                             <Row>
-                                {exercise.name} {/*Buttons for delete of exercise */}
+                                <Card.Text>{exercise.name}</Card.Text>
+                                <Container className="d-flex justify-content-end">
+                                    <Button className="mr-2">
+                                        Edit
+                                    </Button>
+                                    <Button onClick={async () => {
+                                        await deleteExercise(category._id, exercise._id);
+                                        const updatedCategories = await getCategories();
+                                        setCategories(updatedCategories);
+                                    }}>
+                                        Delete
+                                    </Button>
+                                </Container>
                             </Row>
-                            <Row>
-                                {exercise.description}
-                            </Row>
-                            <Row>
-                                {exercise.link}
-                            </Row>
-                            <Row>
-                                <Button>
-                                    Edit
-                                </Button>
-                                <Button onClick={async () => {
-                                    await deleteExercise(category._id, exercise._id);
-                                    const updatedCategories = await getCategories();
-                                    setCategories(updatedCategories);
-                                }}>
-                                    Delete
-                                </Button>
-                            </Row>
-                            
 
-                        </Container>
+                            <Card.Link href={exercise.link.startsWith('http') ? exercise.link : `http://${exercise.link}`}>Video Example</Card.Link>
+                        </Card.Body>
                     ))}
-                    <Container className="d-flex flex-column justify-content-center m-width">
-                                <Button onClick={() => {
-                                    setOpen(true)
-                                    setCurrentCategoryId(category._id);
-                                }
-                                }>
-                                    +
-                                </Button>
-                            </Container>
 
-                    {/*button outside of map to add exercise*/}
-                </Row>
+                    <Container className="d-flex justify-content-center">
+                        <Button
+                            variant="primary" size="sm" className='rounded-circle d-flex justify-content-center text-white'
+                            onClick={() => {
+                                setOpen(true)
+                                setCurrentCategoryId(category._id);
+                            }}
+                        >
+                            +
+                        </Button>
+                    </Container>
+                </Card>
             ))}
             <EditPopup open={open} onClose={() => setOpen(false)}>
                 <Container className="bg-black">
+                    <Form className='mt-5' onSubmit={handleAddExercise}>
+                        <Form.Group className="mb-3" controlId="exerciseName">
+                            <Form.Label className='text-white'>Exercise name</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={name}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
+                            />
+                        </Form.Group>
 
-                
-                <Form className='mt-5' onSubmit={handleAddExercise}>
-                    <Form.Group className="mb-3" controlId="exerciseName">
-                        <Form.Label className='text-white'>Exercise name</Form.Label>
-                        <Form.Control
-                            type="text"
-                            value={name}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setName(e.target.value)}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="exerciseDesc">
-                        <Form.Label className='text-white'>Exercise description</Form.Label>
-                        <Form.Control
-                            type="text"
-                            value={description}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Form.Group className="mb-3" controlId="exerciseLink">
-                        <Form.Label className='text-white'>Video example link</Form.Label>
-                        <Form.Control
-                            type="text"
-                            value={link}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value)}
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" className='mb-5'>Create</Button>
-                </Form>
+                        <Form.Group className="mb-3" controlId="exerciseDesc">
+                            <Form.Label className='text-white'>Exercise description</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={description}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setDescription(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Form.Group className="mb-3" controlId="exerciseLink">
+                            <Form.Label className='text-white'>Video example link</Form.Label>
+                            <Form.Control
+                                type="text"
+                                value={link}
+                                onChange={(e: React.ChangeEvent<HTMLInputElement>) => setLink(e.target.value)}
+                            />
+                        </Form.Group>
+                        <Button variant="primary" type="submit" className='mb-5'>Create</Button>
+                    </Form>
                 </Container>
             </EditPopup>
-
-
         </Container>
     )
 }
@@ -149,3 +149,13 @@ export default function ControlPanel() {
                 </Form>
                 
             )} */}
+
+// <Card className="category-card">
+//       <Card.Body>
+//         <Card.Title className='categoryTitle'>{exercise.name}</Card.Title>
+//         <Card.Text>{exercise.description}</Card.Text>
+//         <Card.Link href={exercise.link.startsWith('http') ? exercise.link : `http://${exercise.link}`}>Video Example</Card.Link>
+//         <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteExercise(categoryId!,exercise._id)}>X</Button>
+//       </Card.Body>
+//     </Card>
+
