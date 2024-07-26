@@ -12,9 +12,7 @@ export function Footer() {
 
             {!userContext?.user && (
                  <Row className='justify-content-center mb-3'>
-                    <Col xs="auto" className='text-center'>
-                        <Link to="/categories" style={{ textDecoration: 'none', color: 'inherit' }}>Categories</Link>
-                    </Col>
+                    
                     <Col xs="auto" className='text-center'>
                         <Link to="/login"  style={{ textDecoration: 'none', color: 'inherit' }}>Login</Link>
                     </Col>
@@ -22,9 +20,7 @@ export function Footer() {
             )}
             {userContext?.user && (
                 <Row className='justify-content-center mb-3'>
-                    <Col xs="auto" className='text-center'>
-                        <Link to="/categories" style={{ textDecoration: 'none', color: 'inherit' }}>Categories</Link>
-                    </Col>
+                    
                     <Col xs="auto" className='text-center'>
                         <Link to="/tracker" style={{ textDecoration: 'none', color: 'inherit' }}>Tracker</Link>
                     </Col>

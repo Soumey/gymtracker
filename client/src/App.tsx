@@ -1,34 +1,55 @@
 
 import './App.css';
 import { Link } from 'react-router-dom';
-
+import Image from 'react-bootstrap/Image'
+import musclesF from './assets/Muscles.png'
+import musclesB from './assets/MusclesBack.png'
+import { Button, Card, CardBody } from 'react-bootstrap';
+import { useEffect, useState } from 'react';
+import { TCategory, getCategories } from './api/getCategories';
 function App() {
+  // 16 przyciskow
+  const [categories, setCategories] = useState<TCategory[]>([]);
+  const [categoriesArray, setCategoriesArray] = useState<string[]>([])
+  useEffect(() => {
+    async function fetchCategories() {
+      const newCategories = await getCategories();
+      setCategories(newCategories);
 
-  
+      const title = newCategories.map(category => category._id);
+      setCategoriesArray(title);
+    }
+    fetchCategories();
+  }, []);
+
+
   return (
-
-    <div 
-        className=' text-center bg-dark container-fluid'
-        style={{
-          height: "100dvh",
-         
-          display: 'flex',
-          justifyContent: 'center',
-          alignItems: 'center',
-          textAlign: 'center',
-        }}
-      >
-        <Link to='/register'><div className='mask w-75 p-3 h-75 mask-hover mx-auto mb-1' style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)', borderRadius:50,marginTop:80 }}>
-          <div className='d-flex justify-content-center align-items-center h-100'>
-            <div className='text-white'>
-              <h1 className='mb-3'>Track Your Gym Progress with GymTracker</h1>
-              <h4 className='mb-3'>Stay on top of your fitness journey with our easy-to-use app.</h4>
-              <h4 className='mb-3'>Join us now!</h4>
-            </div>
-          </div>
+    <div className="app">
+      <div className="image-container">
+        <div className="front">
+          <Image fluid src={musclesF} style={{ minHeight: '500px', minWidth: '300px' }} />
+          <Button variant="success" size="sm" className="btnTraps rounded-circle" title='Traps' as={Link} to={`/categories/${categoriesArray[0]}/exercises`} style={{ textDecoration: 'none', color: 'inherit' }} ></Button>
+          <Button variant="success" size="sm" className="btnChest rounded-circle" title='Chest'></Button>
+          <Button variant="success" size="sm" className="btnAbs rounded-circle" title='ABS'></Button>
+          <Button variant="success" size="sm" className="btnQuads rounded-circle" title='Quads'></Button>
+          <Button variant="success" size="sm" className="btnBiceps rounded-circle" title='Biceps'></Button>
+          <Button variant="success" size="sm" className="btnObliques rounded-circle" title='Obliques'></Button>
+          <Button variant="success" size="sm" className="btnFrontShoulders rounded-circle" title='Front of shoulders'></Button>
+          <Button variant="success" size="sm" className="btnForearms rounded-circle" title='Forearms'></Button>
+          <Button variant="success" size="sm" className="btnHands rounded-circle" title='Hands'></Button>
         </div>
-        </Link>
+        <div className="back">
+          <Image fluid src={musclesB} style={{ minHeight: '500px', minWidth: '300px' }} />
+          <Button variant="success" size="sm" className="btnTrapsBack rounded-circle" title='Back of traps'></Button>
+          <Button variant="success" size="sm" className="btnLats rounded-circle" title='Lats'></Button>
+          <Button variant="success" size="sm" className="btnGlutes rounded-circle" title='Glutes'></Button>
+          <Button variant="success" size="sm" className="btnHamstrings rounded-circle" title='Hamstrings'></Button>
+          <Button variant="success" size="sm" className="btnTriceps rounded-circle" title='Triceps'></Button>
+          <Button variant="success" size="sm" className="btnBackShoulders rounded-circle" title='Back of shoulders'></Button>
+          <Button variant="success" size="sm" className="btnCalves rounded-circle" title='Calves'></Button>
+        </div>
       </div>
+    </div>
   );
 }
 

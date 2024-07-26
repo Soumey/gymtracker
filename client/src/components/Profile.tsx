@@ -14,11 +14,8 @@ export default function Profile() {
 
   const { user } = userContext;
   return (
-    <div className='loginDiv' style={{
-      backgroundImage: `url(${PeakMale})`,
-      backgroundSize: "cover",
-      backgroundPosition: "center",
-    }}>
+    <div className='loginDiv' 
+    >
       <Form style={{ minWidth: 500 }} >
         <Form.Group className="mb-5" style={{ minHeight: 200, minWidth: 200 }}>
           <div className="d-flex justify-content-center text-secondary">

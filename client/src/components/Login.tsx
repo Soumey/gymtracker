@@ -43,10 +43,7 @@ export default function Login() {
 
 
     return (
-        <div className='loginDiv' style={{
-            backgroundImage: `url(${PeakMale})`, backgroundSize: "auto",
-            backgroundPosition: "center",
-        }}>
+        <div className='loginDiv' >
 
             <Form style={{ minWidth: 500 }} onSubmit={handleLoginUser}>
                 <Form.Group className="mb-5" style={{ minHeight: 200, minWidth: 200 }}>

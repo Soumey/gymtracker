@@ -1,10 +1,12 @@
 import React, { useEffect, useState } from "react"
-import { Button, Card, Col, Container, Form, Row } from "react-bootstrap"
+import { Button, Card, Container, Form, Row } from "react-bootstrap"
 import { TCategory, getCategories } from "../api/getCategories";
 import { deleteExercise } from "../api/deleteExercise";
 import EditPopup from "./EditPopup";
 import { createExercise } from "../api/createExercise";
 import './ControlPanel.css'
+import { createCategory } from "../api/createCategory";
+import { deleteCategory } from "../api/deleteCategory";
 
 export default function ControlPanel() {
 
@@ -14,6 +16,8 @@ export default function ControlPanel() {
     const [link, setLink] = useState("");
     const [open, setOpen] = useState<boolean>(false);
     const [currentCategoryId, setCurrentCategoryId] = useState("");
+    const [title,setTitle]=useState("")
+    const [img,setImg]=useState("")
 
     useEffect(() => {
         async function fetchCategories() {
@@ -36,27 +40,34 @@ export default function ControlPanel() {
         }
     };
 
+    async function handleCreateCategory(e: React.FormEvent) {
+        e.preventDefault();
+        const category = await createCategory({ title, img });
+        setCategories([...categories, category]);
+        setTitle("");
+        setImg("");
+    }
+
+    async function handleDeleteCategory(categoryId: string) {
+        await deleteCategory(categoryId);
+        setCategories(categories.filter(category => category._id !== categoryId));
+    }
+
 
     return (
+        
         <Container className="mt-4 d-flex justify-content-center text-white flex-column">
             {/*map on categories to show them */}
-            {/*
-<Card>
-    <Card.Body>
-    <Card.Title className='categoryTitle'>{category.name}</Card.Title>
-    <Card.Text>{exercise.description}</Card.Text>
-     <Card.Link href={exercise.link.startsWith('http') ? exercise.link : `http://${exercise.link}`}>Video Example</Card.Link>
-     <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteExercise(categoryId!,exercise._id)}>X</Button>
-    </Card.Body>
-</Card>*/}
+
             {categories.map((category) => (
                 <Card className="m-5 category-card" key={category._id}>
+                    <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteCategory(category._id)}>X</Button>
                     <Card.Title>
                         {category.title}
                     </Card.Title>
                     {/*map inside of map for exercises inside of category */}
                     {category.exercises.map((exercise) => (
-                        <Card.Body className="border border-3 rounded mb-3 border-secondary  mask-hover mb-1 bg-secondary" style={{backgroundColor:" #808080"}}>
+                        <Card.Body className="border border-3 rounded mb-3 border-secondary  mask-hover mb-1 bg-secondary" style={{ backgroundColor: " #808080" }} key={exercise._id}>
                             <Row>
                                 <Card.Text>{exercise.name}</Card.Text>
                                 <Container className="d-flex justify-content-end">
@@ -90,6 +101,21 @@ export default function ControlPanel() {
                     </Container>
                 </Card>
             ))}
+            
+                
+                <Form  className='mt-5'onSubmit={handleCreateCategory}>
+                    <Form.Group className="mb-3" controlId="categoryTitle">
+                        <Form.Label className='text-white'>Category Title</Form.Label>
+                        <Form.Control
+                            type="text"
+                            value={title}
+                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
+                        />
+                    </Form.Group>  
+                    <Button variant="primary" type="submit" className='mb-5'>Create</Button>
+                </Form>
+                
+                
             <EditPopup open={open} onClose={() => setOpen(false)}>
                 <Container className="bg-black">
                     <Form className='mt-5' onSubmit={handleAddExercise}>
@@ -123,39 +149,7 @@ export default function ControlPanel() {
                 </Container>
             </EditPopup>
         </Container>
+        
     )
 }
-
-{/* {userContext?.user && (
-                
-                <Form  className='mt-5'onSubmit={handleCreateCategory}>
-                    <Form.Group className="mb-3" controlId="categoryTitle">
-                        <Form.Label className='text-white'>Category Title</Form.Label>
-                        <Form.Control
-                            type="text"
-                            value={title}
-                            onChange={(e: React.ChangeEvent<HTMLInputElement>) => setTitle(e.target.value)}
-                        />
-                    </Form.Group>
-
-                    <Form.Group className="mb-3" controlId="categoryImage">
-                        <Form.Label className='text-white'>Image</Form.Label>
-                        <Form.Control
-                            type="file"
-                            onChange={handleFileChange}
-                        />
-                    </Form.Group>
-                    <Button variant="primary" type="submit" className='mb-5'>Create</Button>
-                </Form>
-                
-            )} */}
-
-// <Card className="category-card">
-//       <Card.Body>
-//         <Card.Title className='categoryTitle'>{exercise.name}</Card.Title>
-//         <Card.Text>{exercise.description}</Card.Text>
-//         <Card.Link href={exercise.link.startsWith('http') ? exercise.link : `http://${exercise.link}`}>Video Example</Card.Link>
-//         <Button variant="danger" className='deleteBtn' onClick={() => handleDeleteExercise(categoryId!,exercise._id)}>X</Button>
-//       </Card.Body>
-//     </Card>
 

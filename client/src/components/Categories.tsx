@@ -43,6 +43,7 @@ export default function Categories() {
         }
         fetchCategories();
     }, []);
+    
 
     async function handleDeleteCategory(categoryId: string) {
         await deleteCategory(categoryId);
@@ -50,7 +51,7 @@ export default function Categories() {
     }
 
     return (
-        <Container fluid style={{ backgroundColor: 'rgb(43, 43, 44)', padding: '20px' }}>
+        <Container fluid style={{ backgroundColor: 'rgb(142, 142, 143)', padding: '20px' }}>
             <Row>
                 {categories.map((category) => (
                     <Col xs={12} sm={6} md={4} key={category._id} className="d-flex mt-3">
