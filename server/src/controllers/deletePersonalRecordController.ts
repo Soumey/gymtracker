@@ -1,29 +1,37 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import User from '../models/User';
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
-export const getPersonalRecord = async (req: Request, res: Response) => {
+export const deletePersonalRecordController = async (req: Request, res: Response) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.status(401).json({ message: 'No token provided' });
     }
 
     const token = authHeader.split(' ')[1];
+    const { personalRecordId } = req.body;
 
     try {
         const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
         const userId = decoded.id;
-
-        if (!userId) {
-            return res.status(400).json({ message: 'Invalid user ID format' });
-        }
-
         const user = await User.findById(userId);
+
         if (!user) {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.json(user.personalRecords);
+        const personalRecordIndex = user.personalRecords.findIndex(
+            personalRecord => personalRecord._id?.toString() === personalRecordId
+        );
+        if (personalRecordIndex === -1) {
+            return res.status(404).json({ message: 'Personal record not found' });
+        }
+
+        user.personalRecords.splice(personalRecordIndex, 1);
+        await user.save();
+
+        res.json({ message: 'Personal record deleted' });
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {
             return res.status(403).json({ message: 'Invalid token' });

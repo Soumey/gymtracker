@@ -1,8 +1,9 @@
 import { Request, Response } from 'express';
-import jwt from 'jsonwebtoken';
 import User from '../models/User';
+import mongoose from 'mongoose';
+import jwt from 'jsonwebtoken';
 
-export const getPersonalRecord = async (req: Request, res: Response) => {
+export const createPersonalRecordController = async (req: Request, res: Response) => {
     const authHeader = req.headers.authorization;
     if (!authHeader) {
         return res.status(401).json({ message: 'No token provided' });
@@ -14,7 +15,8 @@ export const getPersonalRecord = async (req: Request, res: Response) => {
         const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
         const userId = decoded.id;
 
-        if (!userId) {
+        const { name, weight, unit } = req.body;
+        if (!mongoose.Types.ObjectId.isValid(userId)) {
             return res.status(400).json({ message: 'Invalid user ID format' });
         }
 
@@ -23,11 +25,21 @@ export const getPersonalRecord = async (req: Request, res: Response) => {
             return res.status(404).json({ message: 'User not found' });
         }
 
-        res.json(user.personalRecords);
+        const newPR = {
+            _id: new mongoose.Types.ObjectId(),
+            name,
+            weight,
+            unit
+        };
+
+        user.personalRecords.push(newPR);
+        await user.save();
+        res.status(201).json(newPR);
     } catch (error) {
         if (error instanceof jwt.JsonWebTokenError) {
             return res.status(403).json({ message: 'Invalid token' });
         }
         res.status(500).json({ message: 'Server error' });
     }
+    
 };

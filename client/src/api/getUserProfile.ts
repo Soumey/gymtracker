@@ -1,8 +1,15 @@
 import { createContext, ReactNode } from "react";
 import { API_URL } from "./config";
+export interface TPersonalRecords{
+    _id:string;
+    name:string;
+    weight:number;
+    unit:string;
+}
 export interface User {
     email: string;
     username: string;
+    personalRecords:TPersonalRecords[];
 }
 export interface UserContextProps {
     user: User | null;

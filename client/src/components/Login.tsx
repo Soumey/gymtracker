@@ -1,8 +1,7 @@
 
-import { Button, Container, Form } from 'react-bootstrap';
+import { Button, Form } from 'react-bootstrap';
 import './Login.css'
 import { Link } from 'react-router-dom';
-import PeakMale from '../assets/PeakMale.png'
 import { useState } from 'react';
 import { loginUser } from '../api/loginUser';
 import toast from 'react-hot-toast';
@@ -22,7 +21,7 @@ export default function Login() {
         e.preventDefault();
         const { email, password } = data;
         try {
-            userContext?.setUser(null); // Clear the previous user state
+            userContext?.setUser(null) // Clear the previous user state
             const responseData = await loginUser({ email, password });
             const { token } = responseData;
             if (responseData.error) {
@@ -47,7 +46,7 @@ export default function Login() {
 
             <Form style={{ minWidth: 500 }} onSubmit={handleLoginUser}>
                 <Form.Group className="mb-5" style={{ minHeight: 200, minWidth: 200 }}>
-                    <div className="d-flex justify-content-center text-secondary">
+                    <div className="d-flex justify-content-center text-white">
                         <h1>Gym Tracker logo bratku</h1>
                     </div>
 
@@ -70,7 +69,7 @@ export default function Login() {
                         onChange={(e: React.ChangeEvent<HTMLInputElement>) => setData({ ...data, password: e.target.value })}
                     />
                 </Form.Group>
-                <Form.Group className="mb-3 text-secondary">
+                <Form.Group className="mb-3 text-white">
                     <div className="d-flex justify-content-between ">
                         <Form.Check type="checkbox" label="Remember me" />
                         <Link to='/' style={{ textDecoration: 'none', color: 'inherit' }}>Forgot password?</Link>
@@ -82,7 +81,7 @@ export default function Login() {
                     </div>
                 </Form.Group>
 
-                <Form.Group className="mb-3 text-secondary">
+                <Form.Group className="mb-3 text-white">
                     Don't have an account? <Link to='/register' style={{ textDecoration: 'none', color: 'red' }} >Register</Link>
                 </Form.Group>
 

@@ -58,9 +58,9 @@ export default function Exercise() {
   }
 
   return (
-    <Container fluid style={{ backgroundColor: 'rgb(43, 43, 44)', padding: '20px' }}>
+    <Container fluid style={{  padding: '20px' }} >
       
-        <Row>
+        <Row >
           {exercises.map((exercise) => (
             <Col xs={12} sm={6} md={4} key={exercise._id} className="d-flex">
               <ListGroup.Item className="w-100">

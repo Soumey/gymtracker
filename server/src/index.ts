@@ -14,6 +14,9 @@ import { createAccountController } from './controllers/createAccountController';
 import { loginUserController } from './controllers/loginUserController';
 import { getProfileController } from './controllers/getProfileController';
 import { updateProfileController } from './controllers/updateProfileController';
+import {  createPersonalRecordController } from './controllers/createPersonalRecordController';
+import { getPersonalRecord } from './controllers/getPersonalRecord';
+import { deletePersonalRecordController } from './controllers/deletePersonalRecordController';
 
 
 const app = express();
@@ -47,7 +50,10 @@ app.get('/profile',getProfileController)
 //app.post('/')
 //app.get('/profile')
 app.post('/profile/', updateProfileController)
-
+//user PRs
+app.post('/tracker/',createPersonalRecordController)
+app.get('/tracker/', getPersonalRecord)
+app.delete('/tracker/',deletePersonalRecordController)
 const db = mongoose.connect(
     process.env.MONGO_URL!)
     .then(() => {

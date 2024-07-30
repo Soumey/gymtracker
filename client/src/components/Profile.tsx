@@ -1,9 +1,8 @@
-import './Login.css'
-import PeakMale from '../assets/PeakMale.png'
-import { useContext, useState } from 'react'
-import { UserContext } from '../api/getUserProfile'
+import './Login.css';
+import { useContext, useState } from 'react';
+import { UserContext } from '../api/getUserProfile';
 import { Button, Form } from 'react-bootstrap';
-import EditPopup from './EditPopup'
+import EditPopup from './EditPopup';
 export default function Profile() {
   const userContext = useContext(UserContext);
   const [open, setOpen]= useState<boolean>(false);
@@ -18,18 +17,18 @@ export default function Profile() {
     >
       <Form style={{ minWidth: 500 }} >
         <Form.Group className="mb-5" style={{ minHeight: 200, minWidth: 200 }}>
-          <div className="d-flex justify-content-center text-secondary">
+          <div className="d-flex justify-content-center text-white">
             <h1>User Info</h1>
           </div>
 
         </Form.Group>
         <Form.Group className="mb-3" controlId="name">
-          <Form.Label className='text-secondary'>
+          <Form.Label className='text-white'>
             {user?.email}
           </Form.Label>
         </Form.Group>
         <Form.Group className="mb-3" controlId="email">
-          <Form.Label className='text-secondary'>
+          <Form.Label className='text-white'>
             {user?.username}
           </Form.Label>
 

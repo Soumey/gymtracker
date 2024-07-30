@@ -5,7 +5,10 @@ const ObjectId = mongoose.Types.ObjectId;
 
 interface PersonalRecords {
   _id: Types.ObjectId;
-  name: string;
+  name: {
+    type:string;
+    unique:true;
+  }
   weight: number;
   unit: string;
 }
